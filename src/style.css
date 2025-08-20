@@ -1,0 +1,49 @@
+/* --- EFECTO AGUA ACTUALIZADO --- */
+.water {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: 
+        linear-gradient(to top, rgba(255, 255, 255, 0.2), transparent 70%), /* brillo plateado */
+        url('https://i.ibb.co/YRbz91r/waves.png') repeat-x;
+    background-size: cover;
+    animation: wave 15s linear infinite; /* movimiento más lento */
+    opacity: 0.6; /* un poco más visible */
+    filter: drop-shadow(0 -5px 10px rgba(255, 255, 255, 0.4)); /* halo plateado */
+}
+
+@keyframes wave {
+    from { background-position-x: 0; }
+    to { background-position-x: 2000px; } /* desplazamiento más largo */
+}
+
+/* Modal "Leer Más" (reutiliza el estilo del modal de compra) */
+#modalLeer .modal-content {
+  background: var(--color-5);
+  color: var(--color-1);
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 500px;
+}
+#modalLeer h2 {
+  color: var(--color-2);
+  margin-bottom: 10px;
+}
+#modalLeer p {
+  color: var(--color-3);
+}
+.footer-links a {
+  color: #fff;              /* Blanco por defecto */
+  text-decoration: none;    /* Quita el subrayado */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #0ff;              /* Celeste cuando pasas el mouse */
+}
+
+
+
+

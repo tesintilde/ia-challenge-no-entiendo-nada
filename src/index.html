@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunavia - Esencia líquida con alma nocturna</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-1: #1f3f56;
+            --color-2: #2f6b8e;
+            --color-3: #4bb7d2;
+            --color-4: #8edceb;
+            --color-5: #f5f9fa;
+            --plateado: linear-gradient(90deg, #c0c0c0, #f5f5f5, #a9a9a9);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-1);
+            color: var(--color-5);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(31, 63, 86, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 10;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-container img {
+            height: 70px;
+            transition: transform 0.3s;
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
+            background: var(--plateado);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--color-4);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-3);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--color-1), var(--color-2));
+        }
+
+        .hero h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5em;
+            color: var(--color-4);
+            text-shadow: 0 0 20px var(--color-3);
+            animation: fadeUp 2s ease-out forwards, glow 3s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @media (min-width: 1024px) {
+            .hero h2 {
+                font-size: 6em;
+            }
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: var(--color-5);
+            max-width: 500px;
+            line-height: 1.6;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* --- EFECTO AGUA CON BRILLO PLATEADO --- */
+        .water {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+            background: 
+                linear-gradient(to top, rgba(255, 255, 255, 0.2), transparent 70%),
+                url('https://i.ibb.co/YRbz91r/waves.png') repeat-x;
+            background-size: cover;
+            animation: wave 15s linear infinite, float 5s ease-in-out infinite;
+            opacity: 0.6;
+            filter: drop-shadow(0 -5px 10px rgba(255, 255, 255, 0.4));
+        }
+
+        @keyframes wave {
+            from { background-position-x: 0; }
+            to { background-position-x: 2000px; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* --- GLOW ANIMATION --- */
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 15px var(--color-3); }
+            50% { text-shadow: 0 0 30px var(--color-4); }
+        }
+
+        /* --- SECCIÓN PRODUCTO --- */
+        .producto {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(47, 107, 142, 0.2);
+        }
+
+        .producto img {
+            width: 200px;
+            filter: drop-shadow(0 0 20px var(--color-3));
+            transition: transform 0.3s;
+        }
+
+        .producto img:hover {
+            transform: scale(1.05);
+        }
+
+        .producto h3 {
+            margin-top: 20px;
+            font-size: 2em;
+            color: var(--color-4);
+        }
+
+        .producto p {
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.6;
+            color: var(--color-5);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(31, 63, 86, 0.8);
+            color: var(--color-4);
+            font-size: 0.9em;
+        }
+
+        /* --- EFECTO FADE-IN SCROLL --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- EFECTO DE OLAS AL CLICK --- */
+        .wave-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at center, rgba(142, 220, 235, 0.4) 0%, transparent 70%);
+            animation: ripple 2s ease-out forwards;
+            z-index: 999;
+        }
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 1; }
+            80% { transform: scale(4); opacity: 0.4; }
+            100% { transform: scale(6); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="logo-container" href="https://www.youtube.com/watch?v=S3WbJVw7X5g" target="_blank">
+            <img src="assets/slogo.png" alt="Lunavia Logo">
+            <span class="logo-text">Lunavia</span>
+        </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#producto">Descripción</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h2>Esencia líquida con alma nocturna</h2>
+        <p id="waveTrigger">Sumérgete en la noche. Siente la energía que fluye como agua bajo la luna.</p>
+        <div class="water"></div>
+    </section>
+
+    <section class="producto fade-in" id="producto">
+    <img src="assets/imagen0.png" alt="Lunavia Lata">
+    <h3>Lunavia Original</h3>
+
+        <p>
+            Lunavia es más que una bebida energética: es una experiencia sensorial que despierta cuerpo y mente con la fuerza sutil de la noche y la fluidez del agua. 
+            Cada sorbo es una fusión de ingredientes naturales, extractos revitalizantes y una estética que conecta con lo místico, lo profundo y lo poderoso.
+        </p>
+    </section>
+
+
+    <script>
+        // Efecto de brillo al pasar el mouse sobre el título
+        document.querySelector('.hero h2').addEventListener('mouseover', function(){
+            this.style.textShadow = '0 0 40px var(--color-4)';
+        });
+        document.querySelector('.hero h2').addEventListener('mouseout', function(){
+            this.style.textShadow = '';
+        });
+
+        // Efecto fade-in en scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Efecto de olas al hacer click en el texto
+        document.getElementById("waveTrigger").addEventListener("click", function(){
+            let wave = document.createElement("div");
+            wave.classList.add("wave-effect");
+            document.body.appendChild(wave);
+            setTimeout(() => wave.remove(), 2000);
+        });
+    </script>
+
+<!-- Botón flotante -->
+<button id="asistenciaBtn">Alto Contraste</button>
+
+<style>
+    /* Botón flotante */
+    #asistenciaBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: var(--color-3);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    #asistenciaBtn:hover {
+        background: var(--color-4);
+        transform: scale(1.05);
+    }
+
+    /* Centrado especial solo para la sección del producto */
+    .producto.centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* ocupa toda la altura de la ventana */
+        flex-direction: column;
+        gap: 20px;
+    }
+</style>
+
+<script>
+    const asistenciaBtn = document.getElementById("asistenciaBtn");
+    let clickState = 0; // 0 = normal, 1 = blanco sin texto, 2 = negro con producto centrado
+
+    asistenciaBtn.addEventListener("click", () => {
+        clickState = (clickState + 1) % 3;
+
+        const productoSection = document.getElementById("producto");
+
+        if (clickState === 1) {
+            // Fondo blanco, texto invisible, producto oculto
+            document.body.style.background = "white";
+            document.querySelectorAll("*").forEach(el => {
+                el.style.color = "transparent";
+                el.style.textShadow = "none";
+                el.style.background = ""; // fondos originales
+            });
+            productoSection.style.display = "none";
+            asistenciaBtn.style.background = "black";
+            asistenciaBtn.style.color = "white";
+            productoSection.classList.remove("centered");
+        } 
+        else if (clickState === 2) {
+            // Fondo negro en todos lados, texto blanco, producto visible y centrado
+            document.querySelectorAll("*").forEach(el => {
+                el.style.color = "white";
+                el.style.textShadow = "";
+                el.style.background = "black"; // todos los fondos negros
+            });
+            productoSection.style.display = "flex";
+            productoSection.classList.add("centered");
+            asistenciaBtn.style.background = "white";
+            asistenciaBtn.style.color = "black";
+        } 
+        else {
+            // Estado original
+            document.body.style.background = "var(--color-1)";
+            document.querySelectorAll("*").forEach(el => {
+                el.style.color = "";
+                el.style.textShadow = "";
+                el.style.background = ""; // restaurar fondos
+            });
+            productoSection.style.display = "";
+            productoSection.classList.remove("centered");
+            asistenciaBtn.style.background = "var(--color-3)";
+            asistenciaBtn.style.color = "white";
+        }
+    });
+</script>
+
+
+<!-- Sección de Productos -->
+<section id="catalogo" class="productos">
+    <h2>Nuestros Productos</h2>
+    <div class="productos-grid">
+        
+        <!-- Producto 1 -->
+        <div class="producto-card">
+            <img src="assets/imagen1.png" alt="Sea Food Cotton Candy">
+            <h3>Sea Food Cotton Candy</h3>
+            <p>Se recomienda servir bien fría… y con una mente abierta.</p>
+            <span class="precio">₿ 0.00012</span>
+            <button class="comprar-btn" data-producto="Sea Food Cotton Candy" data-precio="₿ 0.00012">Comprar</button>
+            <button class="leer-mas-btn" data-producto="Sea Food Cotton Candy" data-descripcion="Seafood Cotton Candy es una bebida que no pide permiso para existir. Es atrevida, absurda y absolutamente única. Imagina el dulzor etéreo del algodón de azúcar fusionado con la esencia marina de mariscos frescos… sí, lo leíste bien. Esta bebida es para los valientes, los curiosos y los que ya han probado todo lo demás.">Leer más</button>
+
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto-card">
+            <img src="assets/imagen2.jpg" alt="Midnight Subway Rat">
+            <h3>Midnight Subway Rat</h3>
+            <p>Te deja preguntándote si fue una bebida o una experiencia post-apocalíptica.</p>
+            <span class="precio">₿ 0.00015</span>
+            <button class="comprar-btn" data-producto="Midnight Subway Rat" data-precio="₿ 0.00015">Comprar</button>
+            <button class="leer-mas-btn" onclick="window.open('https://youtube.com/shorts/a9QhPDPdAzQ?si=grWnOGp9jL8UeoQ-', '_blank')"> Leer más</button>
+
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto-card">
+            <img src="assets/imagen3.jpg" alt="Sopa de Vegetales">
+            <h3>Sopa de Vegetales</h3>
+            <p>Beberla es como entrar en una dimensión paralela donde el almuerzo y la adrenalina se fusionan.</p>
+            <span class="precio">₿ 0.00010</span>
+            <button class="comprar-btn" data-producto="Sopa de Vegetales" data-precio="₿ 0.00010">Comprar</button>
+              <!-- Botón Leer Más -->
+  <button class="leer-mas-btn" data-producto="Sopa de Verduras"  data-descripcion="En un mundo donde las bebidas energéticas suelen presentarse como líquidos fríos, burbujeantes y cargados de estimulantes artificiales, surge una propuesta completamente distinta: Caldo de Verduras con Fideo, una bebida energética que desafía las convenciones y redefine lo que significa revitalizar el cuerpo y el espíritu. Esta bebida no solo aporta energía sostenida, sino que lo hace a través de una experiencia sensorial profundamente humana, cálida y nutritiva. Desde el primer momento en que se abre el envase, el aroma del caldo envuelve al consumidor con notas familiares y reconfortantes. La fragancia de zanahorias cocidas, apio fresco, cebolla dorada y un toque de ajo se eleva como una nube cálida, evocando recuerdos de cocinas hogareñas, tardes lluviosas y momentos compartidos en familia. No hay estridencia ni artificio: solo honestidad en cada molécula de vapor. Esta bebida no busca impresionar con sabores artificiales, sino reconectar con lo esencial. La textura del caldo es suave pero sustanciosa. A diferencia de las bebidas energéticas convencionales, que suelen ser líquidas y efervescentes, esta propuesta ofrece una experiencia más completa. Los fideos, cortos y delicados, flotan en suspensión, aportando una sensación de saciedad que transforma el acto de beber en un momento de pausa y nutrición. No se trata de un trago rápido para seguir corriendo, sino de una invitación a detenerse, respirar y recargar desde adentro. La fórmula de esta bebida ha sido diseñada con precisión científica. En lugar de recurrir a altas dosis de cafeína o azúcar refinada, contiene ingredientes naturales que promueven una energía estable y duradera. Entre sus componentes destacan el extracto de raíz de maca, conocido por sus propiedades adaptógenas; el ginseng siberiano, que mejora la resistencia física y mental; y el guaraná, que aporta un estímulo suave sin provocar nerviosismo. Además, está enriquecida con electrolitos, vitaminas del complejo B y aminoácidos esenciales, convirtiéndola en una opción ideal para quienes necesitan reponer fuerzas después de entrenar, estudiar o enfrentar una jornada intensa. Uno de los aspectos más innovadores de esta bebida es su enfoque holístico. No busca simplemente activar el cuerpo, sino también reconfortar el alma. En tiempos donde el estrés, la ansiedad y la fatiga son moneda corriente, esta bebida propone un nuevo paradigma: la energía puede ser cálida, nutritiva y emocionalmente significativa. Beber este caldo es como recibir un abrazo en forma líquida, una caricia que revitaliza sin agitar. El envase también rompe moldes: una botella térmica reutilizable que mantiene el caldo caliente por horas, con un diseño minimalista y elegante que recuerda a los termos de montaña. Es perfecta para llevar en la mochila, el bolso o incluso en la guantera del auto, lista para brindar energía reconfortante en cualquier momento del día. Además, el envase incluye una pequeña inscripción en su base: “Energía que nutre”, un recordatorio de la filosofía detrás del producto. Esta bebida ha sido especialmente bien recibida por personas que buscan alternativas saludables y conscientes. Deportistas, estudiantes, profesionales y viajeros han encontrado en ella una compañera fiel para sus rutinas. Después de una sesión de entrenamiento, durante una jornada laboral intensa o en medio de un viaje largo, ofrece no solo energía, sino también confort. Es una bebida que respeta el cuerpo y honra la tradición culinaria. En términos de sabor, logra un equilibrio perfecto entre lo vegetal y lo umami. La zanahoria aporta dulzura natural, el apio frescura, la cebolla profundidad y el ajo un toque de carácter. Los fideos, hechos de trigo integral, complementan la mezcla con una textura suave y una nota ligeramente tostada. No hay necesidad de conservantes artificiales ni potenciadores de sabor: todo proviene de ingredientes reales, cocinados con cuidado y respeto. La historia detrás de esta bebida también es digna de contar. Fue creada por un grupo de nutricionistas, chefs y científicos que compartían una visión común: redefinir lo que significa “energía” en el siglo XXI. Cansados de ver cómo las bebidas energéticas se alejaban cada vez más de la nutrición, decidieron unir sus conocimientos para crear algo verdaderamente diferente. El resultado fue este caldo energético, que combina lo mejor de la tradición culinaria con los avances de la nutrición funcional. Además, el proyecto tiene un compromiso fuerte con la sostenibilidad. Todos sus ingredientes provienen de cultivos orgánicos certificados, y su producción minimiza el uso de agua y energía. El envase es completamente reciclable, y la empresa promueve programas de reutilización y devolución. Incluso han desarrollado una línea de botellas personalizadas que pueden ser recargadas en puntos específicos, fomentando el consumo responsable y la reducción de residuos. Esta bebida no es solo una bebida: es una declaración. Una invitación a repensar lo que significa “energía” en un mundo que corre sin parar. Es para quienes prefieren lo auténtico, lo sabroso, lo que nutre de verdad. Porque a veces, lo que más necesitamos no es una explosión de cafeína, sino el sabor familiar de un caldo bien hecho. En resumen, la bebida energética de Caldo de Verduras con Fideo es mucho más que una fórmula funcional. Es una experiencia sensorial, una propuesta ética y una alternativa emocionalmente significativa. En lugar de acelerar sin rumbo, invita a avanzar con propósito. En lugar de estimular artificialmente, nutre con autenticidad. Y en lugar de olvidar el origen de la energía, lo celebra con cada sorbo. Para quienes buscan algo más que una explosión de cafeína, para quienes valoran el sabor, la nutrición y el bienestar integral, esta bebida es la respuesta. Porque la verdadera energía no siempre viene en forma de chispa: a veces, viene en forma de caldo Lo que distingue al Caldo de Verduras con Fideo como bebida energética no es solo su fórmula, sino su filosofía. En una época marcada por la inmediatez, el rendimiento extremo y la desconexión con lo esencial, esta bebida propone un retorno a lo simple, a lo nutritivo, a lo que realmente sostiene. Es una bebida que no solo alimenta el cuerpo, sino que también honra la memoria, la cultura y el bienestar emocional.
+
+El caldo, en muchas culturas, es más que un alimento: es un ritual. En Asia, el ramen y el pho son platos que reúnen familias y celebran la paciencia. En América Latina, el caldo de verduras es remedio, consuelo y tradición. En Europa, las sopas son símbolo de hogar y cuidado. Esta bebida energética toma ese legado y lo transforma en una propuesta portátil, moderna y funcional, sin perder su esencia.
+
+La ciencia detrás del confort
+
+Aunque el sabor y la textura evocan lo casero, la formulación de esta bebida está respaldada por ciencia nutricional avanzada. Los ingredientes han sido seleccionados no solo por su perfil gustativo, sino por sus propiedades energéticas y restauradoras. El caldo contiene un equilibrio perfecto de macronutrientes: carbohidratos complejos provenientes de los fideos integrales, proteínas vegetales extraídas de legumbres y vegetales, y grasas saludables en forma de aceite de oliva extra virgen en microdosis.
+
+Además, se han incorporado compuestos bioactivos como los polifenoles del perejil y el antioxidante quercetina presente en la cebolla. Estos elementos no solo ayudan a combatir el estrés oxidativo, sino que también mejoran la función cognitiva y reducen la inflamación. El resultado es una bebida que no solo da energía, sino que también protege y fortalece.
+
+Momentos de consumo: más allá del gimnasio
+
+Una de las grandes ventajas del Caldo de Verduras con Fideo es su versatilidad. A diferencia de las bebidas energéticas tradicionales, que suelen asociarse con el deporte o la vida nocturna, esta bebida se adapta a múltiples contextos:
+
+En la oficina, como alternativa al café de media tarde, ofreciendo energía sin nerviosismo.
+
+Durante viajes largos, como fuente de calor y nutrición en movimiento.
+
+En jornadas de estudio, ayudando a mantener la concentración sin provocar picos de ansiedad.
+
+En caminatas o excursiones, como alimento ligero y reconfortante que no requiere preparación.
+
+En momentos de estrés emocional, como una pausa cálida que reconecta con el cuerpo y la mente.
+
+Incluso puede convertirse en parte de rutinas de autocuidado: una bebida que se toma con calma, que se saborea, que invita a la introspección. En ese sentido, el Caldo de Verduras con Fideo no solo es funcional, sino también terapéutico.
+
+Diseño emocional: el envase como experiencia
+
+El diseño del envase ha sido pensado para reforzar la experiencia emocional de la bebida. No se trata solo de una botella térmica: es un objeto que comunica valores. Su forma ergonómica se adapta a la mano como una taza, su textura suave recuerda la cerámica artesanal, y su color —un tono cálido entre el terracota y el verde oliva— evoca la tierra y la naturaleza.
+
+Además, cada envase viene con una frase inspiradora grabada en el interior de la tapa, que solo se revela al abrirla. Frases como “Respira profundo”, “Hoy es suficiente” o “Nutre tu camino” acompañan el momento de consumo y lo transforman en un acto consciente. Es una bebida que no solo se toma: se vive.
+
+Impacto social y cultural
+
+Más allá de su valor nutricional, esta bebida tiene el potencial de generar un impacto cultural. En un mundo donde el concepto de energía está asociado a la velocidad, la productividad y el rendimiento extremo, el Caldo de Verduras con Fideo propone una visión alternativa: la energía como equilibrio, como nutrición, como cuidado.
+
+Este enfoque puede influir en hábitos de consumo, en la forma en que las personas entienden el bienestar, e incluso en cómo se diseñan los espacios de trabajo y estudio. Imagina oficinas donde, en lugar de máquinas de café, haya estaciones de caldo caliente. Universidades que ofrezcan esta bebida en sus bibliotecas. Gimnasios que la incluyan como parte de la recuperación post-entrenamiento. El caldo puede convertirse en símbolo de una nueva cultura energética.
+
+Proyecciones de marca: más allá del producto
+
+La marca detrás de esta bebida tiene un universo por explorar. A partir del concepto del caldo energético, pueden desarrollarse líneas complementarias:
+
+Caldo de Verduras con Fideo versión fría, ideal para el verano, con notas herbales y vegetales frescos.
+
+Caldo con quinoa y cúrcuma, enfocado en la recuperación muscular.
+
+Caldo nocturno con lavanda y melisa, pensado para la relajación y el descanso.
+
+Snacks sólidos basados en el caldo, como barritas de fideos deshidratados con vegetales.
+
+Incluso podría surgir una línea de productos para rituales de bienestar: velas con aroma a caldo, mantas térmicas, tazas personalizadas, diarios de energía. La marca puede convertirse en un estilo de vida, en una comunidad que celebra el equilibrio entre rendimiento y cuidado.
+
+Testimonios reales: la voz del consumidor
+
+Los primeros usuarios de esta bebida han compartido experiencias que van más allá de lo funcional. Algunos relatan cómo les ayudó a superar momentos de ansiedad, otros cómo les permitió reconectar con recuerdos de infancia. Hay quienes lo usan como parte de su rutina de meditación, y quienes lo consideran su “pausa sagrada” en medio del caos diario.
+
+Una estudiante universitaria escribió: “Tomar este caldo en la biblioteca me hace sentir como si estuviera en casa. Me da energía, pero también me calma. Es como si alguien me dijera: ‘estás haciendo lo mejor que puedes’”.
+
+Un entrenador personal comentó: “Después de entrenar, mis clientes no quieren una bebida azucarada. Quieren algo que los reconforte. Este caldo es perfecto. Les da energía sin agitar, y los hace sentir cuidados”.
+
+Conclusión: energía con propósito
+
+El Caldo de Verduras con Fideo como bebida energética representa una evolución necesaria en la forma en que entendemos el bienestar. No se trata de competir con las bebidas tradicionales, sino de ofrecer una alternativa que responda a las necesidades reales de las personas: nutrición, equilibrio, conexión emocional.
+
+Es una bebida que honra el pasado —la tradición del caldo casero— y lo proyecta hacia el futuro, con ciencia, diseño y propósito. Es una invitación a repensar lo que significa estar energizado: no como estar acelerado, sino como estar presente, nutrido y en paz.
+
+Porque a veces, la verdadera energía no viene de una chispa. Viene de un sorbo cálido, de un fideo flotando en el caldo, de un momento de pausa. Y eso, en este mundo que corre sin parar, es revolucionario." > Leer más </button>
+</div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .productos {
+        padding: 50px;
+        background: var(--color-1);
+        color: var(--color-5);
+        text-align: center;
+    }
+    .productos h2 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        color: var(--color-4);
+        font-family: 'Great Vibes', cursive;
+    }
+    .productos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .producto-card {
+        background: var(--color-2);
+        border-radius: 15px;
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .producto-card img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .producto-card h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: var(--color-4);
+    }
+    .producto-card p {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
+    .precio {
+        display: block;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: var(--color-3);
+    }
+    .producto-card button {
+        background: var(--color-3);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+    .producto-card button:hover {
+        background: var(--color-4);
+    }
+    .producto-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+</style>
+
+<!-- Modal de Compra -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar">&times;</span>
+    <h2>Formulario de Compra</h2>
+    <p id="producto-seleccionado"></p>
+    <form id="compraForm">
+      <label>Nombre completo</label>
+      <input type="text" required>
+
+      <label>Email</label>
+      <input type="email" required>
+
+      <label>Dirección</label>
+      <input type="text" required>
+
+      <label>Email</label>
+      <input type="email" required>
+
+      <label>Dirección</label>
+      <input type="text" required>
+
+      <label>Método de pago (Wallet BTC)</label>
+      <input type="text" required>
+
+      <label>Color favorito</label>
+      <input type="text">
+
+      <label>Código Postal</label>
+      <input type="text">
+
+      <label>¿Se aceptan donaciones gratuitas?</label>
+      <select>
+        <option value="si">Sí</option>
+        <option value="claro">Claro que sí</option>
+      </select>
+
+      <label>¿Pero o gato?</label>
+      <input type="text">
+
+      <label>Dame propina</label>
+      <input type="number" placeholder="₿ 0.00001">
+
+      <label>¿Has tenido un pescado?</label>
+      <select>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <label>¿Me transfieres?</label>
+      <select>
+        <option value="si">Sí</option>
+        <option value="claro">Claro</option>
+      </select>
+      <button type="submit">Confirmar Pedido</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* ----------- Modal con colores Lunavia ----------- */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(31, 63, 86, 0.85); /* semi-transparente con color-1 */
+  }
+  .modal-content {
+    background: var(--color-5);
+    color: var(--color-1);
+    margin: 8% auto;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    text-align: left;
+  }
+  .modal-content h2 {
+    margin-bottom: 15px;
+    color: var(--color-2);
+  }
+  .modal-content p {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: var(--color-3);
+  }
+  .modal-content label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: var(--color-1);
+  }
+  .modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--color-3);
+    background: var(--color-4);
+    color: var(--color-1);
+  }
+  .modal-content button {
+    background: var(--color-2);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    transition: 0.3s;
+  }
+  .modal-content button:hover {
+    background: var(--color-3);
+  }
+  .cerrar {
+    float: right;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--color-2);
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("modal");
+  const cerrar = document.querySelector(".cerrar");
+  const productoTexto = document.getElementById("producto-seleccionado");
+
+  document.querySelectorAll(".comprar-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      modal.style.display = "block";
+      productoTexto.textContent = "Producto: " + btn.dataset.producto + " | Precio: " + btn.dataset.precio;
+    });
+  });
+
+  cerrar.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  document.getElementById("compraForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("✅ Pedido confirmado. Gracias por tu compra en Lunavia 🌙💧");
+    modal.style.display = "none";
+  });
+</script>
+
+<!-- Modal Leer Más -->
+<div id="modalLeer" class="modal">
+  <div class="modal-content">
+    <span class="cerrar-leer">&times;</span>
+    <h2 id="titulo-leer"></h2>
+    <p id="descripcion-leer"></p>
+  </div>
+</div>
+
+<script>
+  const modalLeer = document.getElementById("modalLeer");
+  const cerrarLeer = document.querySelector(".cerrar-leer");
+  const tituloLeer = document.getElementById("titulo-leer");
+  const descripcionLeer = document.getElementById("descripcion-leer");
+
+  document.querySelectorAll(".leer-mas-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      tituloLeer.textContent = btn.dataset.producto;
+      descripcionLeer.textContent = btn.dataset.descripcion;
+      modalLeer.style.display = "block";
+    });
+  });
+
+  cerrarLeer.addEventListener("click", () => {
+    modalLeer.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target == modalLeer) {
+      modalLeer.style.display = "none";
+    }
+  });
+</script>
+
+<!-- ================= COLLAGE ================= -->
+<section class="collage">
+  <div class="collage-grid">
+    <img src="assets/imagen6.jpg" alt="Collage 6" class="big">
+    <img src="assets/imagen7.jpg" alt="Collage 7" class="tall">
+    <img src="assets/imagen8.jpg" alt="Collage 8" class="wide">
+    <img src="assets/imagen9.jpg" alt="Collage 9">
+    <img src="assets/imagen10.jpg" alt="Collage 10" class="big">
+    <img src="assets/imagen11.jpg" alt="Collage 11" class="wide">
+    <img src="assets/imagen12.jpg" alt="Collage 12" class="tall">
+    <img src="assets/imagen13.jpg" alt="Collage 13">
+    <img src="assets/imagen14.jpg" alt="Collage 14" class="wide">
+    <img src="assets/imagen15.jpg" alt="Collage 15" class="big">
+    <img src="assets/imagen16.jpg" alt="Collage 16">
+
+    <!-- assets/imagen17 ahora es GIF -->
+    <a href="https://www.youtube.com/watch?v=IxX_QHay02M&list=RDIxX_QHay02M&start_radio=1" target="_blank">
+      <img src="assets/imagen17.gif" alt="Collage 17" class="tall">
+    </a>
+
+    <img src="assets/imagen18.jpg" alt="Collage 18">
+
+    <!-- assets/imagen19 ahora es PNG -->
+    <a href="https://www.youtube.com/watch?v=Rk1MYMPDx3s" target="_blank">
+      <img src="assets/imagen19.png" alt="Collage 19" class="wide">
+    </a>
+
+    <img src="assets/imagen20.jpg" alt="Collage 20" class="big">
+    <img src="assets/imagen21.jpg" alt="Collage 21">
+    <img src="assets/imagen22.jpg" alt="Collage 22">
+
+    <!-- assets/imagen23 ya tenía enlace -->
+    <a href="https://www.youtube.com/watch?v=UaUy5ZxGXJ4" target="_blank">
+      <img src="assets/imagen23.jpg" alt="Collage 23" class="wide">
+    </a>
+
+    <!-- assets/imagen24 ahora es PNG -->
+    <img src="assets/imagen24.png" alt="Collage 24">
+
+    <img src="assets/imagen25.jpg" alt="Collage 25">
+    <img src="assets/imagen26.jpg" alt="Collage 26">
+
+    <!-- assets/imagen27 ahora es PNG -->
+    <img src="assets/imagen27.png" alt="Collage 27">
+
+    <img src="assets/imagen28.jpg" alt="Collage 28">
+    <img src="assets/imagen29.jpg" alt="Collage 29">
+
+    <!-- assets/imagen30 ahora es PNG -->
+    <img src="assets/imagen30.png" alt="Collage 30">
+
+    <!-- assets/imagen31 ya tenía enlace -->
+    <a href="https://www.youtube.com/watch?v=Rk1MYMPDx3s" target="_blank">
+      <img src="assets/imagen31.jpg" alt="Collage 31">
+    </a>
+
+    <img src="assets/imagen32.jpg" alt="Collage 32">
+    <img src="assets/imagen33.jpg" alt="Collage 33">
+    <img src="assets/imagen34.jpg" alt="Collage 34">
+
+    <!-- assets/imagen35 ahora es PNG -->
+    <img src="assets/imagen35.png" alt="Collage 35" class="big">
+  </div>
+</section>
+
+<style>
+/* Collage */
+.collage {
+  width: 100%;
+  background: #001a33; /* azul oscuro */
+  padding: 10px;
+  margin: 0;
+}
+
+.collage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  gap: 8px;
+}
+
+.collage-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Tamaños desordenados */
+.collage-grid img.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.collage-grid img.wide {
+  grid-column: span 2;
+}
+
+.collage-grid img.tall {
+  grid-row: span 2;
+}
+</style>
+
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="contacto">
+  <h2>Contacto</h2>
+  <div class="footer-links">
+    <a href="#" id="contactoLink">Contáctanos</a>
+    <a href="#" id="historiaLink">Nuestra Historia</a>
+    <a href="https://share.google/iUGgQWbjlOhFE9FZo" target="_blank">Local</a>
+    <a href="#" id="somosLink">Quiénes somos</a>
+    <a href="#" id="terminosLink">Terminós de Uso</a>
+  </div>
+
+© 2025 Lunavia. Todos los derechos reservados. 
+<a href="https://www.youtube.com/watch?v=-HJwbxVe8Rg" target="_blank" class="emoji-link">💧</a>
+🌙
+
+</footer>
+
+<!-- Recuadro Modal -->
+<div id="footerModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<style>
+  /* Footer */
+  .footer {
+    background: #111;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .footer-links a {
+    color: #fff; /* Blanco */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover {
+    color: #0ff;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+  .modal-content img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+  .close {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+  }
+
+.emoji-link {
+  color: #fff;           /* Blanco */
+  font-size: 15px;       /* Más grande */
+  text-decoration: none; /* Sin subrayado */
+  cursor: default;       /* No parece un link */
+  opacity: 1;            /* Máxima visibilidad */
+}
+
+
+</style>
+
+<script>
+  const modall = document.getElementById("footerModal");
+  const modalBody = document.getElementById("modalBody");
+  const closeModal = document.querySelector(".close");
+
+  // Función abrir modal con contenido
+  function abrirModal(content) {
+    modalBody.innerHTML = content;
+    modall.style.display = "flex";
+  }
+
+  // Link Contáctanos
+  document.getElementById("contactoLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    abrirModal("<p>Solo aceptamos visitas presenciales</p>");
+  });
+
+  // Link Historia
+document.getElementById("historiaLink").addEventListener("click", (e) => {
+  e.preventDefault();
+  abrirModal('<img src="assets/imagen5.jpg" alt="Nuestra Historia">');
+});
+
+
+// Link Quiénes somos
+document.getElementById("somosLink").addEventListener("click", (e) => {
+  e.preventDefault();
+  abrirModal('<img src="assets/imagen4.jpg" alt="Quiénes somos">');
+});
+
+  // Link Términos de uso
+document.getElementById("terminosLink").addEventListener("click", (e) => {
+  e.preventDefault();
+  abrirModal("<p>Terminó el uso</p>");
+  setTimeout(() => {
+    window.location.href = "https://www.google.com/?hl=es";
+  }, 1500); // 1.5 segundos
+});
+
+  // Cerrar modal
+  closeModal.addEventListener("click", () => modall.style.display = "none");
+  window.addEventListener("click", (e) => {
+    if (e.target === modall) modall.style.display = "none";
+  });
+</script>
+
+
+
+
+
+</body>
+</html>
